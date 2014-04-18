@@ -2,7 +2,7 @@
 ### Vars
 dir=~/dotfiles
 olddir=~/dotfiles_old
-files="zshrc"
+files="zshrc tmux.conf aliases gitconfig"
 
 ### Create dotfiles_old in homedire
 echo "Creating $olddir for backup of any existing dotfiles in ~"

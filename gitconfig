@@ -1,0 +1,26 @@
+[color]
+    ui = true
+
+[diff]
+    tool = vimdiff
+
+[difftool]
+    prompt = false
+
+[core]
+    editor = vim
+    autcrlf = false
+
+[push]
+    default = current
+
+[alias]
+    st = status
+    cm = commit -m
+    p = push
+    pr = pull -rebase
+    d = difftool
+    pretty-log = log --graph --pretty=format:\"%Cred%h%Creset - %s %Cgreen(%cr) %C(bold blue)<%an>%Creset%C(yellow)%d%Creset\" --abbrev-commit --date=relative
+
+[include]
+    path = ~/.gitconfig.local
