@@ -24,3 +24,6 @@
 
 [include]
     path = ~/.gitconfig.local
+[user]
+	name = Thomas G. Johansen
+	email = tgj@pcss.no
