@@ -95,9 +95,9 @@ ${voffset -1}${goto 32}${top name 2} ${goto 124}${top cpu 2}${alignr }${top mem 
 ${voffset -1}${goto 32}${top name 3} ${goto 124}${top cpu 3}${alignr }${top mem 3}
 ${voffset -1}${goto 32}${top name 4} ${goto 124}${top cpu 4}${alignr }${top mem 4}
 
-#Time & Date ${hr 2}
-#${font Arial Black:size=26}${alignc}${time %H:%M}${font}
-#${alignc}${time %A, %B %d, %Y}
+Time & Date ${hr 2}
+${font Arial Black:size=26}${alignc}${time %H:%M}${font}
+${alignc}${time %A, %B %d, %Y}
 
 HDD ${hr 2}
 #${font conkycolors:size=15}i${font}${voffset -5}${goto 32}HDD temperature:${alignr}${color #FCAF3E}${exec hddtemp /dev/sda -n --unit=C} °C$color
@@ -107,8 +107,8 @@ ${voffset 4}${color #FCAF3E}${fs_free /}/${fs_size /}${color} ${alignr}${fs_bar 
 #${voffset 4}${fs_free /home}/${fs_size /home} ${alignr}${fs_bar 8,60 /home}
 #${font conkycolors:size=16}i${font} ${voffset -5}Windows 7
 #${voffset 4}${fs_free /media/windows7}/${fs_size /media/windows7} ${alignr}${fs_bar 8,60 /media/windows7}
-
-#Battery: ${alignr}${battery}
+#
+#Battery: ${alIGNr}${battery}
 #${battery_bar}
 
 Network ${hr 2}
