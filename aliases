@@ -1,2 +1,4 @@
-alias ls='ls -alF'
+alias ls='ls --color=auto'
+alias ll='ls -alF --color=auto'
 
+alias irssi='TERM=screen-256color irssi'
