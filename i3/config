@@ -1,0 +1,243 @@
+set $mod Mod4
+
+set $blue #005588
+set $grey1 #484848
+set $grey2 #333333
+set $grey3 #666666
+
+set $terminal termite
+
+focus_follows_mouse no
+
+    #client.focused            $gray2   $gray2   #FFFFFF   #666666
+    #client.focused_inactive   $gray2   $gray2   #FFFFFF   #000000
+    #client.unfocused          $gray2   $gray2   #FFFFFF   #000000
+
+    #class                  border   backgr.  text
+    #client.focused          #333333 #333333 #825969
+    #client.focused          #909737 #909737 #825969
+    #client.focused          #506067 #506067 #825969
+
+#client.focused          #909737 #909737 #825969
+client.focused          #BD3232 #BD3232 #825969
+client.focused_inactive #191919 #191919 #999999
+client.unfocused        #191919 #191919 #999999
+client.urgent           #cd989a #cd989a #2e3436
+client.background       #121212
+
+# Use Mouse To Drag / Drop Floating Window
+floating_modifier $mod
+
+new_window pixel 2
+new_float pixel 2
+
+set $WS1 "1:term"
+set $WS2 "2:www"
+set $WS3 "3:text"
+set $WS4 "4:media"
+set $WS5 "5:misc"
+set $WS6 "6:system"
+set $WS7 "7:office"
+set $WS8 "8:mail"
+set $WS9 "9:games"
+
+#bindsym $mod+shift+d exec dmenu_run -b -i -nb "#002b36" -nf "#eee8d5" -sb "#cb4b16" -sf "#fdf6e3" "-*-terminus--12-*-*-*-*-*-iso8859-1"  "$@"
+bindsym $mod+shift+d exec "dmenu_run -i -b -p run"
+bindsym $mod+d exec --no-startup-id j4-dmenu-desktop --dmenu="dmenu -i -b -fn '-*-terminus-*-*-*-*-12-*-*-*-*-*-*-*'"
+bindsym $mod+x exec rofi -show run -bg "#333333" -fg "#909737" -no-disable-history -terminal termite -ssh-command "{terminal} -e '{ssh-client} {host}'" -no-levenshtein-sort
+
+bindsym $mod+shift+plus move scratchpad
+bindsym $mod+plus scratchpad show
+
+# Start New Treminal
+bindsym $mod+Return exec $terminal
+
+# Horizontal Split L/R
+bindsym $mod+h split h
+
+# Vertical Split T/B
+bindsym $mod+v split v
+
+# Reload i3 Settings
+bindsym $mod+Shift+c reload
+
+# Restart i3 In Place
+bindsym $mod+Shift+r restart
+
+# Logout of i3 While Preserving X
+bindsym $mod+Control+Delete exec i3-msg exit
+
+# Lockscreen and Suspend System
+bindsym XF86Launch6 exec i3lock && systemctl suspend
+
+# Switch Workspaces
+bindsym $mod+Tab workspace back_and_forth
+bindsym $mod+1 workspace $WS1
+bindsym $mod+2 workspace $WS2
+bindsym $mod+3 workspace $WS3
+bindsym $mod+4 workspace $WS4
+bindsym $mod+5 workspace $WS5
+bindsym $mod+6 workspace $WS6
+bindsym $mod+7 workspace $WS7
+bindsym $mod+8 workspace $WS8
+bindsym $mod+9 workspace $WS9
+bindsym $mod+0 workspace 10
+
+bindsym $mod+Shift+1 move container to workspace $WS1
+bindsym $mod+Shift+2 move container to workspace $WS2
+bindsym $mod+Shift+3 move container to workspace $WS3
+bindsym $mod+Shift+4 move container to workspace $WS4
+bindsym $mod+Shift+5 move container to workspace $WS5
+bindsym $mod+Shift+6 move container to workspace $WS6
+bindsym $mod+Shift+7 move container to workspace $WS7
+bindsym $mod+Shift+8 move container to workspace $WS8
+bindsym $mod+Shift+9 move container to workspace $WS9
+bindsym $mod+Shift+0 move container to workspace 10
+
+bindsym $mod+Control+Right workspace next
+bindsym $mod+Control+Left workspace prev
+
+#####################
+# Window Management #
+#####################
+# Kill focused window
+bindsym $mod+q kill
+
+# Toggle Fullscreen Focused Window
+bindsym $mod+f fullscreen
+
+# Change Window Focus
+bindsym $mod+Right focus right
+bindsym $mod+Left focus left
+bindsym $mod+Up focus up
+bindsym $mod+Down focus down
+
+# ...and for Vimmmmmers
+#bindsym $mod+h focus left
+#bindsym $mod+l focus right
+#bindsym $mod+j focus up
+#bindsym $mod+k focus down
+
+# Toggle Floating / Tiled Window
+bindsym $mod+space floating toggle
+
+# Move Floating Window
+bindsym $mod+Shift+Left move left
+bindsym $mod+Shift+Down move down
+bindsym $mod+Shift+Up move up
+bindsym $mod+Shift+Right move right
+
+# Hotkey Volume Control
+bindsym XF86AudioMute exec amixer sset Master toggle
+bindsym XF86AudioLowerVolume exec amixer sset Master playback 5%-
+bindsym XF86AudioRaiseVolume exec amixer sset Master playback 5%+
+bindsym XF86KbdBrightnessUp exec kbdlight up
+bindsym XF86KbdBrightnessDown exec kbdlight down
+bindsym XF86AudioPlay exec "ncmpcpp toggle"
+bindsym XF86AudioStop exec "ncmpcpp stop"
+bindsym XF86AudioNext exec "ncmpcpp next"
+bindsym XF86AudioPrev exec "ncmpcpp prev"
+
+bindsym $mod+m mode "Mopidy"
+mode "Mopidy" {
+    bindsym Left exec ncmpcpp prev 
+    bindsym Right exec ncmpcpp next
+    bindsym Up exec ncmpcpp toggle
+    bindsym Down exec ncmpcpp stop
+    bindsym Shift+Up exec ncmpcpp volume +1
+    bindsym Shift+Down exec ncmpcpp volume -1
+    bindsym Return mode "default"
+    bindsym Escape mode "default"
+}
+
+# Resize Floating Window
+bindsym $mod+r mode "resize"
+mode "resize" {
+        bindsym Left resize shrink width 10 px or 10 ppt
+        bindsym Down resize grow height 10 px or 10 ppt
+        bindsym Up resize shrink height 10 px or 10 ppt
+        bindsym Right resize grow width 10 px or 10 ppt
+        bindsym Return mode "default"
+        bindsym Escape mode "default"
+}
+
+# Remove window borders
+#for_window [class="^.*"] border pixel 1
+
+#for_window [class="xpad"]
+for_window [class="mpd|MPlayer|Gsimplecal|Skype|Java|Spotify"] floating enable
+for_window [class="File-roller|Lxappearance"] floating enable, border normal
+for_window [class="Speedcrunch"] floating enable, border normal
+for_window [class="fs-uae"] floating enable, border normal
+for_window [class="feh"] floating enable
+for_window [window_role="pop-up"] floating enable
+for_window [class="Pavucontrol"] floating enable # PulseAudio volume control
+for_window [class="Steam" title="* - Properties"] floating enable
+for_window [class="Steam"] new_float pixel 1
+for_window [title="popup"] floating enable
+
+assign [instance="Navigator|filezilla|transmission-gtk|Dialog"] $WS2
+assign [class="Chromium|Google-chrome-beta|Dwb|Firefox"] $WS2
+assign [class="subl3|Subl3"] $WS3
+assign [class="MPlayer|mpv|Popcorntime|Spotify"] $WS4
+assign [class="Thunar|Gimp|Blender|Speedcrunch"] $WS5
+assign [instance="bleachbit"] $WS6
+assign [instance="libreoffice"] $WS7
+assign [class="libreoffice*"] $WS7
+assign [class="Wine|Steam"] $WS9
+
+# Window Font
+font pango:Cousine bold 8
+
+##############
+# Status Bar #
+##############
+
+bar {
+    position top
+    status_command ~/.i3/conky
+    colors{
+        statusline #AAAAAA
+        background #333333
+        focused_workspace $grey2 $grey2 #FFFFFF
+        inactive_workspace $grey1 $grey1 #AAAAAA
+    }
+}
+
+#################
+# Start Up Apps #
+#################
+
+# Screen Shot
+bindsym Print exec scrot
+bindsym $mod+Control+l exec i3lock -i ~/Pictures/lock.png
+
+# Screen Brightness
+bindsym XF86MonBrightnessDown exec xbacklight -dec 10
+bindsym XF86MonBrightnessUp exec xbacklight -inc 10
+
+# Audio Startup
+exec --no-startup-id nvidia-settings --load-config-only
+exec --no-startup-id pulseaudio --start # Pulseaudio equalizer start up
+exec --no-startup-id pactl load-module module-equalizer-sink
+exec --no-startup-id pactl load-module module-dbus-protocol
+
+# Screen Timeout (seconds)
+exec --no-startup-id xscreensaver -no-splash
+
+# Mouse tweaks
+exec --no-startup-id xset m 3/1 4
+
+# Set wallpaper
+exec --no-startup-id nitrogen --restore
+
+exec --no-startup-id setxkbmap macintosh_vndr/no
+exec --no-startup-id clipit
+exec --no-startup-id dropboxd
+exec --no-startup-id xflux -l 61.20 -g 10.14
+exec --no-startup-id amixer sset Master 20%
+exec --no-startup-id dunst
+#exec /usr/lib/lxpolkit/lxpolkit
+exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
+exec --no-startup-id unclutter
+exec --no-startup-id nm-applet
